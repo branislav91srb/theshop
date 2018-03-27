@@ -1,20 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TheShop.Utility;
 
 namespace TheShop
 {
-    public enum LogLevel
-    {
-        DEBUG = 0,
-        ERROR = 1,
-        WARN = 2,
-        INFO = 3,
-        VERBOSE = 4
-    }
-
     public class Logger
     {
         public void Log(LogLevel level, string message)

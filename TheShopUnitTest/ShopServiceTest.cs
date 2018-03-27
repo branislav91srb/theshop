@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TheShop;
+using TheShop.Models.Suppliers;
+using TheShop.Services;
 
 namespace TheShopUnitTest
 {

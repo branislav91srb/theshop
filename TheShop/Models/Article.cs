@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TheShop.Base;
 
 namespace TheShop
 {
-    public class Article
+    public class Article : EntityBase
     {
-        public int ID { get; set; }
         public string ArticleName { get; set; }
 
         public int ArticlePrice { get; set; }
@@ -19,18 +15,12 @@ namespace TheShop
 
         public override bool Equals(object obj)
         {
-            if (obj is Article)
+            if (obj is Article other)
             {
-                Article other = (Article)obj;
-                return Equals(other.ID, this.ID) && Equals(other.ArticleName, this.ArticleName)
-                     && Equals(other.ArticlePrice, this.ArticlePrice);
+                return Equals(other.ID, ID) && Equals(other.ArticleName, ArticleName)
+                     && Equals(other.ArticlePrice, ArticlePrice);
             }
             return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return ID;
         }
     }
 }
