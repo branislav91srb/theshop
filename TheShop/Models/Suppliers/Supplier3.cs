@@ -9,16 +9,13 @@ namespace TheShop.Models.Suppliers
 {
     public class Supplier3 : ISupplier
     {
-        public bool ArticleInInventory(int id)
-        {
-            return true;
-        }
+        public bool ArticleInInventory(int id) => true;
 
         public Article GetArticle(int id)
         {
             return new Article()
             {
-                ID = 1,
+                ID = id,
                 ArticleName = "Article from supplier3",
                 ArticlePrice = 460
             };

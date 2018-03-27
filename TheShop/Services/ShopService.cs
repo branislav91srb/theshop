@@ -7,23 +7,23 @@ using TheShop.Utility;
 
 namespace TheShop.Services
 {
-	public class ShopService
-	{
+    public class ShopService
+    {
         private ArticleRepository _repository;
-		private Logger _logger;
+        private Logger _logger;
 
         public ShopService(Logger logger)
-		{
-			_repository = new ArticleRepository();
-			_logger = logger;
-		}
+        {
+            _repository = new ArticleRepository();
+            _logger = logger;
+        }
 
-		public void OrderAndSellArticle(int id, int maxExpectedPrice, int buyerId)
-		{
-			var article = OrderArticle(id, maxExpectedPrice);
+        public void OrderAndSellArticle(int id, int maxExpectedPrice, int buyerId)
+        {
+            var article = OrderArticle(id, maxExpectedPrice);
 
             SellArticle(article, id, buyerId);
-		}
+        }
 
         private Article OrderArticle(int id, int maxExpectedPrice)
         {
@@ -32,8 +32,11 @@ namespace TheShop.Services
             foreach (ISupplier supplier in SupplierFactory.GetAll())
             {
                 var article = FindArticle(supplier, id, maxExpectedPrice);
+
                 if (article != null)
+                {
                     bestOfferArticles.Add(article);
+                }
             }
 
             return bestOfferArticles.OrderBy(x => x.ArticlePrice).FirstOrDefault();
@@ -52,44 +55,28 @@ namespace TheShop.Services
             article.SoldDate = DateTime.Now;
             article.BuyerUserId = buyerId;
 
-            try
-            {
-                _repository.Save(article);
-                _logger.Log(LogLevel.INFO, "Article with id=" + id + " is sold.");
-            }
-            catch (ArgumentNullException ex)
-            {
-                _logger.Log(LogLevel.ERROR, "Could not save article with id=" + id);
-                throw new Exception("Could not save article with id");
-            }
-            catch (Exception)
-            {
-            }
+            _repository.Save(article);
+            _logger.Log(LogLevel.INFO, "Article with id=" + id + " is sold.");
         }
 
         public Article FindArticle(ISupplier supplier, int id, int maxExpectedPrice)
         {
-            if(supplier.ArticleInInventory(id))
+            if (supplier.ArticleInInventory(id))
             {
-                try
-                {
-                    Article article = supplier.GetArticle(id);
-                    if (article.ArticlePrice <= maxExpectedPrice)
-                        return article;
-                }
-                catch (Exception)
-                {
-                    throw new Exception("Could not find article with ID: " + id);
-                }
+                Article article = supplier.GetArticle(id);
 
+                if (article.ArticlePrice <= maxExpectedPrice)
+                {
+                    return article;
+                }
             }
             return null;
         }
 
         public Article GetById(int id)
-		{
-			return _repository.GetById(id);
-		}
-	}
+        {
+            return _repository.GetById(id);
+        }
+    }
 
 }
