@@ -1,4 +1,6 @@
-﻿namespace TheShop.Base
+﻿using TheShop.Utility;
+
+namespace TheShop.Base
 {
     public abstract class EntityBase
     {

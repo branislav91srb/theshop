@@ -9,7 +9,7 @@ namespace TheShopUnitTest
     [TestClass]
     public class ShopServiceTest
     {
-        ShopService shopService = new ShopService();
+        ShopService shopService = new ShopService(new Logger());
 
         [TestMethod]
         public void OrderAndSellArticleTest()
