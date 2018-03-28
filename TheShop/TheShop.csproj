@@ -42,13 +42,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\EntityBase.cs" />
+    <Compile Include="Base\ISupplier.cs" />
     <Compile Include="DAL\ArticleRepository.cs" />
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="Models\Article.cs" />
-    <Compile Include="Models\EntityBase.cs" />
+    <Compile Include="Models\Suppliers\Supplier1.cs" />
+    <Compile Include="Models\Suppliers\Supplier2.cs" />
+    <Compile Include="Models\Suppliers\Supplier3.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShopService.cs" />
+    <Compile Include="Services\ShopService.cs" />
+    <Compile Include="Services\SupplierFactory.cs" />
+    <Compile Include="Utility\Compare.cs" />
+    <Compile Include="Utility\Enums.cs" />
     <Compile Include="Utility\Logger.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,16 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TheShop;
+using TheShop.Models.Suppliers;
+using TheShop.Services;
+using TheShop.Utility;
 
 namespace TheShopUnitTest
 {
     [TestClass]
     public class ShopServiceTest
     {
-        ShopService shopService = new ShopService();
+        ShopService shopService = new ShopService(new Logger());
 
         [TestMethod]
         public void OrderAndSellArticleTest()
@@ -43,12 +46,14 @@ namespace TheShopUnitTest
             Article expected = new Article()
             {
                 ID = 1,
-                ArticleName = "Article from supplier1",
-                ArticlePrice = 458
+                Name = "Article from supplier1",
+                Price = 458
             };
 
             Article actual = shopService.FindArticle(supplier, 1, 458);
-            Assert.AreEqual<Article>(expected, actual);
+            var equals = actual.EqualsTo(expected);
+
+            Assert.IsTrue(equals);
         }
 
         [TestMethod]
@@ -84,12 +89,18 @@ namespace TheShopUnitTest
             Article expected = new Article()
             {
                 ID = 1,
-                ArticleName = "Article from supplier1",
-                ArticlePrice = 458
+                Name = "Article from supplier1",
+                Price = 458,
+                BuyerId = 10,
+                IsSold = true,
+                SoldDate = DateTime.Today
             };
             shopService.OrderAndSellArticle(1, 459, 10);
             Article actual = shopService.GetById(1);
-            Assert.AreEqual<Article>(expected, actual);
+
+            var equals = actual.EqualsTo(expected);
+
+            Assert.IsTrue(equals);
         }
 
         [TestMethod]

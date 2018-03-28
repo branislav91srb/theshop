@@ -11,14 +11,14 @@ namespace TheShop
 
         public IList<Article> GetAll()
         {
-            return _articles.ToList();
+            return _articles;
         }
 
-        public Article GetById(object id)
+        public Article GetById(int id)
         {
             try
             {
-                return _articles.Where(x => x.ID == (int)id).Single();
+                return _articles.Single(x => x.ID == id);
             }
             catch
             {
