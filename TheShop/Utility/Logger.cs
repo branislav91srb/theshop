@@ -5,6 +5,7 @@ namespace TheShop
 {
     public class Logger
     {
+
         public void Log(LogLevel level, string message)
         {
             switch (level)

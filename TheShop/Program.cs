@@ -24,7 +24,6 @@ namespace TheShop
             try
             {
                 shopService.OrderAndSellArticle(1, 20, 10);
-                //shopService.OrderAndSellArticle(2, 459, 10);
             }
             catch (Exception ex)
             {
@@ -36,7 +35,6 @@ namespace TheShop
         {
             try
             {
-                //print article on console
                 var article = shopService.GetById(1);
                 logger.Log(LogLevel.INFO, "Found article with ID: " + article.ID);
             }

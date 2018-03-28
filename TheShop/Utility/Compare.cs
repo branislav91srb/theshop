@@ -8,6 +8,14 @@ namespace TheShop.Utility
 {
     public static class Compare
     {
+        /// <summary>
+        /// Compares property values of two objects 
+        /// </summary>
+        /// <typeparam name="TFirst"></typeparam>
+        /// <typeparam name="TSecound"></typeparam>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns>False if not same type or all property values are not same. In other case true.</returns>
         public static bool EqualsTo<TFirst, TSecound>(this TFirst first, TSecound second) where TFirst : class, new() 
             where TSecound : class
         {

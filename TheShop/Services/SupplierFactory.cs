@@ -10,9 +10,13 @@ namespace TheShop.Services
 {
     public static class SupplierFactory
     {
-        public static ISupplier Get(int number)
+        /// <summary>
+        /// Returns specific suplier
+        /// </summary>
+        /// <param name="id"></param>
+        public static ISupplier Get(int id)
         {
-            switch (number)
+            switch (id)
             {
                 case 1:
                     return new Supplier1();
@@ -25,13 +29,16 @@ namespace TheShop.Services
             }
         }
 
+        /// <summary>
+        /// Returns all existing supliers
+        /// </summary>
         public static List<ISupplier> GetAll()
         {
             return new List<ISupplier>
             {
                 new Supplier1(),
                 new Supplier2(),
-                new Supplier3(),
+                new Supplier3()
             };
         }
     }
