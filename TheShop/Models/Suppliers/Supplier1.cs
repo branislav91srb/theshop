@@ -11,8 +11,8 @@ namespace TheShop.Models.Suppliers
             return new Article()
             {
                 ID = id,
-                ArticleName = "Article from supplier1",
-                ArticlePrice = 458
+                Name = "Article from supplier1",
+                Price = 458
             };
         }
     }

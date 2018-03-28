@@ -22,9 +22,15 @@ namespace TheShop.Services
         {
             var article = OrderArticle(id, maxExpectedPrice);
 
-            SellArticle(article, id, buyerId);
+            SellArticle(article, buyerId);
         }
 
+        /// <summary>
+        /// Search for article in all suppliers if exists
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="maxExpectedPrice"></param>
+        /// <returns>Article with lowest price or null</returns>
         private Article OrderArticle(int id, int maxExpectedPrice)
         {
             List<Article> bestOfferArticles = new List<Article>();
@@ -39,33 +45,33 @@ namespace TheShop.Services
                 }
             }
 
-            return bestOfferArticles.OrderBy(x => x.ArticlePrice).FirstOrDefault();
+            return bestOfferArticles.OrderBy(x => x.Price).FirstOrDefault();
         }
 
-        private void SellArticle(Article article, int id, int buyerId)
+        private void SellArticle(Article article, int buyerId)
         {
             if (article == null)
             {
                 throw new Exception("Could not order article");
             }
 
-            _logger.Log(LogLevel.DEBUG, "Trying to sell article with id=" + id);
+            _logger.Log(LogLevel.DEBUG, "Trying to sell article with id=" + article.ID);
 
             article.IsSold = true;
-            article.SoldDate = DateTime.Now;
-            article.BuyerUserId = buyerId;
+            article.SoldDate = DateTime.Today;
+            article.BuyerId = buyerId;
 
             _repository.Save(article);
-            _logger.Log(LogLevel.INFO, "Article with id=" + id + " is sold.");
+            _logger.Log(LogLevel.INFO, "Article with id=" + article.ID + " is sold.");
         }
 
         public Article FindArticle(ISupplier supplier, int id, int maxExpectedPrice)
         {
             if (supplier.ArticleInInventory(id))
             {
-                Article article = supplier.GetArticle(id);
+                var article = supplier.GetArticle(id);
 
-                if (article.ArticlePrice <= maxExpectedPrice)
+                if (article.Price <= maxExpectedPrice)
                 {
                     return article;
                 }
